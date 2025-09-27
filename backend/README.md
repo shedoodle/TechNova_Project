@@ -11,7 +11,7 @@ npm install
 
 2. Create a `.env` file with:
 ```
-PORT=5000
+PORT=5001
 NODE_ENV=development
 ```
 

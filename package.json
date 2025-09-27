@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  
+  "scripts": {
+  "dev": "concurrently \"npm run server\" \"npm start --prefix technova\"",
+  "server": "node backend/server.js",
+  "start": "react-scripts start"
+}
+
+}
