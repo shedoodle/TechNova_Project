@@ -1,0 +1,20 @@
+[
+  {
+    "mp_name": "Jane Doe",
+    "riding": "Ottawa Centre",
+    "party": "Example Party",
+    "donor_name": "Acme Inc",
+    "donor_type": "Corporation",
+    "amount": 2000,
+    "date": "2023-10-15"
+  },
+  {
+    "mp_name": "John Smith",
+    "riding": "Toronto West",
+    "party": "Another Party",
+    "donor_name": "John Citizen",
+    "donor_type": "Individual",
+    "amount": 500,
+    "date": "2023-11-02"
+  }
+]
