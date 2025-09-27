@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
-const axios = require('axios');
+const dotenv = require('dotenv'); //loads environment variables
+const axios = require('axios'); // calls OpenNorth and OpenParliament
 
 // Load environment variables
 dotenv.config();
