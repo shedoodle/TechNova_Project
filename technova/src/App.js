@@ -36,7 +36,7 @@ function App() {
   return (
     <div style={{ padding: "2rem", maxWidth: "1400px", margin: "0 auto" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <h1>Canadian Parliamentary Dashboard</h1>
+        <h1>Is Your MP an MP? (Massive Piece...)</h1>
         <div style={{ display: "flex", gap: "1rem" }}>
           <button 
             onClick={() => setCurrentView("dashboard")}
@@ -45,7 +45,7 @@ function App() {
               backgroundColor: currentView === "dashboard" ? "#007bff" : "#6c757d", 
               color: "white", 
               border: "none", 
-              borderRadius: "4px",
+              borderRadius: "8px",
               cursor: "pointer"
             }}
           >
@@ -58,7 +58,7 @@ function App() {
               backgroundColor: currentView === "mp-report" ? "#007bff" : "#6c757d", 
               color: "white", 
               border: "none", 
-              borderRadius: "4px",
+              borderRadius: "8px",
               cursor: "pointer"
             }}
           >

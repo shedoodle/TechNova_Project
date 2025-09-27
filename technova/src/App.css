@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+:root {
+  --primary: #ff6b6b;   /* coral red */
+  --secondary: #4ecdc4; /* aqua */
+  --bg: #fffaf0;        /* warm background */
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
