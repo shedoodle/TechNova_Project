@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import MotionDashboard from "./components/MotionDashboard";
+import MPReportCard from "./components/MPReportCard";
 
 function App() {
+  const [currentView, setCurrentView] = useState("dashboard"); // "dashboard" or "mp-report"
   const [postalCode, setPostalCode] = useState("");
   const [mpData, setMpData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -21,6 +24,7 @@ function App() {
       }
       const mp = await mpResponse.json();
       setMpData(mp);
+      setCurrentView("mp-report");
     } catch (err) {
       setError(err.message);
       console.error('Error:', err);
@@ -30,56 +34,69 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "1200px", margin: "0 auto" }}>
-      <h1>Canadian MP Report Card</h1>
-      
-      {/* Postal Code Lookup */}
-      <div style={{ marginBottom: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
-        <h2>Find Your MP</h2>
-        <form onSubmit={handlePostalCodeSubmit}>
-          <input
-            type="text"
-            placeholder="Enter Canadian postal code (e.g., K1A 0A6)"
-            value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value.toUpperCase())}
-            style={{ padding: "8px", marginRight: "8px", width: "300px" }}
-          />
+    <div style={{ padding: "2rem", maxWidth: "1400px", margin: "0 auto" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+        <h1>Canadian Parliamentary Dashboard</h1>
+        <div style={{ display: "flex", gap: "1rem" }}>
           <button 
-            type="submit" 
-            disabled={loading}
-            style={{ padding: "8px 16px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "4px" }}
+            onClick={() => setCurrentView("dashboard")}
+            style={{ 
+              padding: "8px 16px", 
+              backgroundColor: currentView === "dashboard" ? "#007bff" : "#6c757d", 
+              color: "white", 
+              border: "none", 
+              borderRadius: "4px",
+              cursor: "pointer"
+            }}
           >
-            {loading ? "Looking up..." : "Find MP"}
+            Motion Dashboard
           </button>
-        </form>
-        {error && <p style={{ color: "red", marginTop: "8px" }}>Error: {error}</p>}
+          <button 
+            onClick={() => setCurrentView("mp-report")}
+            style={{ 
+              padding: "8px 16px", 
+              backgroundColor: currentView === "mp-report" ? "#007bff" : "#6c757d", 
+              color: "white", 
+              border: "none", 
+              borderRadius: "4px",
+              cursor: "pointer"
+            }}
+          >
+            MP Report Card
+          </button>
+        </div>
       </div>
 
-      {/* MP Information */}
-      {mpData && (
-        <div style={{ marginBottom: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
-          <h2>Your Member of Parliament</h2>
-          <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-            {mpData.photo && (
-              <img 
-                src={mpData.photo} 
-                alt={mpData.name}
-                style={{ width: "150px", height: "150px", borderRadius: "8px", objectFit: "cover" }}
+      {currentView === "dashboard" ? (
+        <MotionDashboard />
+      ) : (
+        <div>
+          {/* Postal Code Lookup */}
+          <div style={{ marginBottom: "2rem", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
+            <h2>Find Your MP</h2>
+            <form onSubmit={handlePostalCodeSubmit}>
+              <input
+                type="text"
+                placeholder="Enter Canadian postal code (e.g., K1A 0A6)"
+                value={postalCode}
+                onChange={(e) => setPostalCode(e.target.value.toUpperCase())}
+                style={{ padding: "8px", marginRight: "8px", width: "300px" }}
               />
-            )}
-            <div>
-              <h3>{mpData.name}</h3>
-              <p><strong>Riding:</strong> {mpData.riding}</p>
-              <p><strong>Party:</strong> {mpData.party}</p>
-              <p><strong>Email:</strong> <a href={`mailto:${mpData.email}`}>{mpData.email}</a></p>
-              {mpData.url && (
-                <p><strong>Profile:</strong> <a href={mpData.url} target="_blank" rel="noopener noreferrer">View Official Profile</a></p>
-              )}
-            </div>
+              <button 
+                type="submit" 
+                disabled={loading}
+                style={{ padding: "8px 16px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "4px" }}
+              >
+                {loading ? "Looking up..." : "Find MP"}
+              </button>
+            </form>
+            {error && <p style={{ color: "red", marginTop: "8px" }}>Error: {error}</p>}
           </div>
+
+          {/* MP Information */}
+          {mpData && <MPReportCard mpData={mpData} />}
         </div>
       )}
-
     </div>
   );
 }
