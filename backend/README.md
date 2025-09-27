@@ -22,10 +22,8 @@ npm run dev
 
 ## API Endpoints
 
-- `GET /api/health` - Health check
 - `GET /api/mp/:postalCode` - Lookup MP by postal code
-- `GET /api/mp/:postalCode/report-card` - Get full MP report card
-- `POST /api/mp/:postalCode/rating` - Submit community rating
+
 
 ## Next Steps
 
