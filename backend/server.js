@@ -272,9 +272,9 @@ app.get('/api/motions', async (req, res) => {
       // Fetch MP voting records for this vote using the ballots endpoint
       let mpVotes = [];
       try {
-        // Get ballots for this vote
+        // Get ballots for this vote - fetch ALL MPs (up to 400 to cover all 338 MPs)
         const mpVotesResponse = await axios.get(
-          `https://api.openparliament.ca/votes/ballots/?vote_url=/votes/${vote.session}/${vote.number}/&limit=100&format=json`
+          `https://api.openparliament.ca/votes/ballots/?vote_url=/votes/${vote.session}/${vote.number}/&limit=400&format=json`
         );
         
         const ballots = mpVotesResponse.data.objects;
